@@ -15,15 +15,5 @@ public @interface Work {
 	 * @return
 	 */
 	String value() default "";
-	/**
-	 * 是否必须.
-	 * @return 
-	 */
-	boolean must() default true;
-	/**
-	 * 默认值.
-	 * @return
-	 */
-	String fixed() default "";
 	
 }

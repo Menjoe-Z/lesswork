@@ -1,7 +1,0 @@
-Manifest-Version: 1.0
-Bundle-ManifestVersion: 2
-Bundle-Name: context
-Bundle-SymbolicName: context
-Bundle-Version: 1.0.0.qualifier
-Export-Package: cn.lesswork.context
-Import-Package: org.eclipse.jetty.server

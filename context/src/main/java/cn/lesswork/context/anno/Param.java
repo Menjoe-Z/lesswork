@@ -13,4 +13,14 @@ public @interface Param {
 
 	public String value();
 	
+	/**
+	 * 是否必须.
+	 * @return 
+	 */
+	boolean must() default true;
+	/**
+	 * 默认值.
+	 * @return
+	 */
+	String fixed() default "";
 }

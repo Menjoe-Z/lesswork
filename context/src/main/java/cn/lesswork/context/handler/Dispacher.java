@@ -3,12 +3,14 @@ package cn.lesswork.context.handler;
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.lang.reflect.Method;
+import java.lang.reflect.Parameter;
 import java.util.HashMap;
 import java.util.Map;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import cn.lesswork.context.anno.Param;
 import cn.lesswork.context.enums.MethodType;
 import cn.lesswork.context.model.Container;
 import cn.lesswork.context.model.RouterBean;
@@ -51,16 +53,17 @@ final class Dispacher {
 			}
 			Method work = routerBean.getMethod();
 			Class<?> clazz = routerBean.getClazz();
-			Object resultObj = null;
 			Object object = this.CLASS_INSTANCES.get(clazz);
 			if (null == object) {
 				object = clazz.newInstance();
 				this.CLASS_INSTANCES.put(clazz, object);
 			}
-			resultObj = ParamaterHandler.getInstance().getAllParameter(req, object, work);
+			Object resultObj = ParamaterHandler.getInstance().getAllParameter(req, object, work);
 			out.print(ViewHandler.getInstance().outView(work, resultObj));
+		} catch (IllegalArgumentException e) {
+			out.print("不支持的参数数据类型:\t" + e);
 		} catch (Exception e) {
-			e.printStackTrace();
+			out.print(e);
 		} finally {
 			out.flush();
 			out.flush();

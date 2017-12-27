@@ -3,15 +3,12 @@ package cn.lesswork.context.handler;
 import java.lang.reflect.InvocationTargetException;
 import java.lang.reflect.Method;
 import java.lang.reflect.Parameter;
-import java.time.LocalDateTime;
-import java.util.Date;
 import java.util.Map;
-
 import javax.servlet.http.HttpServletRequest;
-
 import cn.lesswork.context.anno.Param;
+import cn.lesswork.context.enums.DataType;
 
-final class ParamaterHandler {
+public final class ParamaterHandler {
 	
 	private ParamaterHandler() {
 	}
@@ -26,8 +23,11 @@ final class ParamaterHandler {
 	 * @param object 对象
 	 * @param work 函数
 	 * @return 参数数组.
+	 * @throws InvocationTargetException 
+	 * @throws IllegalArgumentException 
+	 * @throws IllegalAccessException 
 	 */
-	public Object getAllParameter(HttpServletRequest req, Object object, Method work) {
+	public Object getAllParameter(HttpServletRequest req, Object object, Method work) throws Exception {
 		int paramSize =  work.getParameterCount();
 		Object[] objArr = null;
 		if (paramSize > 0) {
@@ -37,36 +37,37 @@ final class ParamaterHandler {
 			for (int i = 0; i < parameters.length; i++) {
 				Parameter param = parameters[i];
 				Param paramAnn = param.getAnnotation(Param.class);
-				objArr[i] = this.paramSizeJude(param, params.get(paramAnn.value()));
+				Object resultItem = this.paramSizeJudg(param.getType(), params.get(paramAnn.value()));
+				if (null == resultItem) { //参数不匹配时, 参数不是必须时
+					boolean must = paramAnn.must();
+					if (must) {
+						return String.format("【%s】 is requed", paramAnn.value());
+					}
+					resultItem = this.typeJudg(param.getType(), paramAnn.fixed());
+				}
+				objArr[i] = resultItem;
 			}
 		}
-		Object result = null;
-		try {
-			result = work.invoke(object, objArr);
-		} catch (IllegalAccessException e) {
-			e.printStackTrace();
-		} catch (IllegalArgumentException e) {
-			e.printStackTrace();
-		} catch (InvocationTargetException e) {
-			e.printStackTrace();
-		}
-		return result;
+		return work.invoke(object, objArr);
 	}
 	/**
-	 * 参数个数.
+	 * 单个参数和多个参数处理.
 	 * @param param 形参
 	 * @param values url传值的参数
 	 * @return 参数数组
 	 */
-	private Object paramSizeJude(Object param, String[] values) {
+	private Object paramSizeJudg(Class param, String[] values) {
+		if (null == values) {
+			return null;
+		}
 		Object obj = null;
 		if (values.length == 1) {
-			obj = this.typeJude(param, values[0]);
+			obj = this.typeJudg(param, values[0]);
 		} else {
 			Object[] childArgs = new Object[values.length];
 			int i = 0;
 			for (String value : values) {
-				childArgs[i] = this.typeJude(param, value);
+				childArgs[i] = this.typeJudg(param, value);
 				i++;
 			}
 			obj = childArgs;
@@ -74,26 +75,23 @@ final class ParamaterHandler {
 		return obj;
 	}
 	/**
-	 * 
-	 * @param param
-	 * @param value
-	 * @return
+	 * url携带参数的类型转换.
+	 * @param param 方法上的参数类型.
+	 * @param value 地址栏中携带的参数值
+	 * @return 转换后的参数.
 	 */
-	private Object typeJude(Object param, String value) {
-		if (param instanceof Integer) {
+	private Object typeJudg(Class param, String value) {
+		DataType DT = DataType.DT;
+		if (param.equals(DT._INTEGER) || param.equals(DT.INTEGER)) {
 			return Integer.parseInt(value);
-		} else if (param instanceof String) {
-			return (String) value;
-		} else if (param instanceof Double) {
+		} else if (param.equals(DT._DOUBLE) || param.equals(DT.DOUBLE)) {
 			return new Double(value);
-		} else if (param instanceof Float) {
+		} else if (param.equals(DT._FLOAT) || param.equals(DT.FLOAT)) {
 			return new Float(value);
-		} else if (param instanceof Long) {
+		} else if (param.equals(DT._LONG) || param.equals(DT.LONG)) {
 			return new Long(value);
-		} else if (param instanceof Boolean) {
+		} else if (param.equals(DT._BOOLEAN) || param.equals(DT.BOOLEAN)) {
 			return new Boolean(value);
-		} else if ((param instanceof Date) || (param instanceof LocalDateTime)) {
-			return LocalDateTime.parse(value);
 		} else {
 			return value;
 		}
