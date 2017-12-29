@@ -4,11 +4,12 @@
 &nbsp;&nbsp;&nbsp;&nbsp;1.内嵌jetty容器<br/>
 &nbsp;&nbsp;&nbsp;&nbsp;2.薄封装<br/>
 &nbsp;&nbsp;&nbsp;&nbsp;3.高效，高性能<br/>
-&nbsp;&nbsp;&nbsp;&nbsp;4. 完全 0 配置<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;4.完全 0 配置<br/>
 
 <h2>环境：</h2><br/>
-&nbsp;&nbsp;&nbsp;&nbsp;maven<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;maven3.9+<br/>
 &nbsp;&nbsp;&nbsp;&nbsp;jdk1.8+<br/>
+
 
 <h2>快速开始:</h2>
 	<h3>pom.xml</h3>
