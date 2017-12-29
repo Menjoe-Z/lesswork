@@ -1,9 +1,12 @@
 package cn.lesswork.context.boot;
 
+
 import javax.servlet.ServletContextEvent;
 import javax.servlet.ServletContextListener;
 import org.eclipse.jetty.server.Server;
+import org.eclipse.jetty.server.session.SessionHandler;
 import org.eclipse.jetty.servlet.ServletContextHandler;
+
 import cn.lesswork.context.handler.MainHandler;
 
 /**
@@ -22,6 +25,7 @@ public final class LessWorkApp {
         ServletContextHandler context = new ServletContextHandler(server, "/");
         context.addEventListener(new MyLister());
         server.setHandler(context);
+        context.setSessionHandler(new SessionHandler());
         context.addServlet(MainHandler.class, "/");
         try {
 			server.start();

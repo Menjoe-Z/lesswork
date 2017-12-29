@@ -9,7 +9,7 @@ import java.util.Date;
 import com.alibaba.fastjson.JSON;
 
 import cn.lesswork.context.anno.View;
-import cn.lesswork.context.utils.FileUtil;
+import cn.lesswork.context.common.FileUtil;
 
 final class ViewHandler {
 	private ViewHandler() {

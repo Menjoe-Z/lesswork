@@ -1,5 +1,9 @@
 package cn.lesswork.context.enums;
 
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
+
 public final class DataType {
 	
 	private DataType() {}
@@ -25,5 +29,11 @@ public final class DataType {
 	public static final Class _BOOLEAN = Boolean.class;
 	
 	public static final Class BOOLEAN = boolean.class;
+	
+	public static final Class REQUEST = HttpServletRequest.class;
+	
+	public static final Class RESPONSE = HttpServletResponse.class;
+	
+	public static final Class SESSION = HttpSession.class;
 
 }

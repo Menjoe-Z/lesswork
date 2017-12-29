@@ -15,6 +15,14 @@
 	    <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
 	    <java.version>1.8</java.version>
 	    <commonversion>1.0.0</commonversion>
+	    <apache.commons-io.version>2.6</apache.commons-io.version>
+	    <jetty-server.version>9.4.0.v20161208</jetty-server.version>
+	    <jetty-webapp.version>9.4.0.v20161208</jetty-webapp.version>
+	    <jetty-continuation.version>9.4.0.v20161208</jetty-continuation.version>
+	    <jetty-jsp.version>9.1.4.v20140401</jetty-jsp.version>
+	    <fastjson.version>1.2.40</fastjson.version>
+	    <junit.version>3.8.1</junit.version>
+	    <commons-fileupload.version>1.3.3</commons-fileupload.version>
 	</properties>
 	<dependencyManagement>
 		<dependencies>
@@ -23,6 +31,47 @@
 		  		<artifactId>context</artifactId>
 		  		<version>${commonversion}</version>
 			</dependency>
+			<dependency>
+			    <groupId>commons-fileupload</groupId>
+			    <artifactId>commons-fileupload</artifactId>
+			    <version>${commons-fileupload.version}</version>
+			</dependency>
+			<dependency>
+			    <groupId>commons-io</groupId>
+			    <artifactId>commons-io</artifactId>
+			    <version>${apache.commons-io.version}</version>
+			</dependency>
+			<dependency>
+				<groupId>org.eclipse.jetty</groupId>
+				<artifactId>jetty-server</artifactId>
+				<version>${jetty-server.version}</version>
+			</dependency>
+			<dependency>
+				<groupId>org.eclipse.jetty</groupId>
+				<artifactId>jetty-webapp</artifactId>
+				<version>${jetty-webapp.version}</version>
+			</dependency>
+			<dependency>
+				<groupId>org.eclipse.jetty</groupId>
+				<artifactId>jetty-continuation</artifactId>
+				<version>${jetty-continuation.version}</version>
+			</dependency>
+			<dependency>
+				<groupId>org.eclipse.jetty</groupId>
+				<artifactId>jetty-jsp</artifactId>
+				<version>${jetty-jsp.version}</version>
+			</dependency>
+			<dependency>
+			    <groupId>com.alibaba</groupId>
+			    <artifactId>fastjson</artifactId>
+			    <version>${fastjson.version}</version>
+			</dependency>
+		    <dependency>
+		      	<groupId>junit</groupId>
+		      	<artifactId>junit</artifactId>
+		      	<version>${junit.version}</version>
+		      	<scope>test</scope>
+		    </dependency>
 		</dependencies>
 	</dependencyManagement>
 </project>

@@ -7,7 +7,6 @@
     <artifactId>lesswork</artifactId>
     <version>${commonversion}</version>
   </parent>
-  <groupId>com.lesswork.framework</groupId>
   <artifactId>context</artifactId>
   <name>context</name>
   <url>http://maven.apache.org</url>
@@ -19,34 +18,30 @@
   	<dependency>
 		<groupId>org.eclipse.jetty</groupId>
 		<artifactId>jetty-server</artifactId>
-		<version>9.4.0.v20161208</version>
 	</dependency>
 	<dependency>
 		<groupId>org.eclipse.jetty</groupId>
 		<artifactId>jetty-webapp</artifactId>
-		<version>9.4.0.v20161208</version>
 	</dependency>
-	 
+	<dependency>
+	    <groupId>commons-fileupload</groupId>
+	    <artifactId>commons-fileupload</artifactId>
+	</dependency>
 	<dependency>
 		<groupId>org.eclipse.jetty</groupId>
 		<artifactId>jetty-continuation</artifactId>
-		<version>9.4.0.v20161208</version>
 	</dependency>
-	 
 	<dependency>
 		<groupId>org.eclipse.jetty</groupId>
 		<artifactId>jetty-jsp</artifactId>
-		<version>9.1.4.v20140401</version>
 	</dependency>
 	<dependency>
 	    <groupId>com.alibaba</groupId>
 	    <artifactId>fastjson</artifactId>
-	    <version>1.2.40</version>
 	</dependency>
     <dependency>
       	<groupId>junit</groupId>
       	<artifactId>junit</artifactId>
-      	<version>3.8.1</version>
       	<scope>test</scope>
     </dependency>
   </dependencies>

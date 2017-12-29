@@ -12,9 +12,8 @@ import cn.lesswork.context.anno.Less;
 import cn.lesswork.context.anno.Work;
 import cn.lesswork.context.model.Container;
 import cn.lesswork.context.model.RouterBean;
-public class LessBoot {
-	
-	public LessBoot() {
+final class LessBoot {
+	protected LessBoot() {
 		this.handleWork();
 	}
 	

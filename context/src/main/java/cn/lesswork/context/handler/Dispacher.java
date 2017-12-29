@@ -58,11 +58,12 @@ final class Dispacher {
 				object = clazz.newInstance();
 				this.CLASS_INSTANCES.put(clazz, object);
 			}
-			Object resultObj = ParamaterHandler.getInstance().getAllParameter(req, object, work);
+			Object resultObj = ParamaterHandler.getInstance().getAllParameter(req, resp, object, work);
 			out.print(ViewHandler.getInstance().outView(work, resultObj));
 		} catch (IllegalArgumentException e) {
 			out.print("不支持的参数数据类型:\t" + e);
 		} catch (Exception e) {
+			e.printStackTrace();
 			out.print(e);
 		} finally {
 			out.flush();
